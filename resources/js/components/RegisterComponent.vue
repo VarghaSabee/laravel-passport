@@ -20,7 +20,18 @@
               >Works in latest Chrome, Safari, and Firefox.</a>
             </p>
           </div>
-
+          <div class="form-label-group">
+            <input
+              type="text"
+              v-model="form.name"
+              id="text"
+              class="form-control"
+              placeholder="Name"
+              required
+              autofocus
+            />
+            <label for="inputEmail">Name</label>
+          </div>
           <div class="form-label-group">
             <input
               type="email"
@@ -46,7 +57,7 @@
             <label for="inputPassword">Password</label>
           </div>
 
-            <div class="form-label-group">
+          <div class="form-label-group">
             <input
               type="password"
               v-model="form.password_conf"
@@ -74,28 +85,31 @@
 <script>
 export default {
   mounted() {
-     if(this.$store.state.check){
-        this.$router.push({ name: "dash"});
-      }
+    if (this.$store.state.check) {
+      this.$router.push({ name: "dash" });
+    }
   },
-    data: () => ({
+  data: () => ({
     form: {
+      name: "",
       email: "",
       password: "",
-      password_conf:""
+      password_conf: ""
     }
   }),
-  methods:{
+  methods: {
     register() {
       console.log("register");
-      if(this.form.password !== this.form.password_conf){
-          alert('Password not match with confirmation')
-          return;
+      if (this.form.password !== this.form.password_conf) {
+        alert("Password not match with confirmation");
+        return;
       }
       axios
         .post("/api/register", {
+          name: this.form.name,
           email: this.form.email,
-          password: this.form.password
+          password: this.form.password,
+          password_confirmation: this.form.password_conf
         })
         .then(res => {
           // save token to vuex
@@ -103,10 +117,11 @@ export default {
           // get user data, store in vuex
           this.$store.dispatch("fetchauth");
           // redirect
-          this.$router.push({ name: "dash"});
+           this.$router.push({path:'/dashboard'});
         })
         .catch(e => {
           console.log(e);
+          alert('Something goes wrong :(');
         });
     }
   }

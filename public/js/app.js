@@ -1935,6 +1935,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     if (this.$store.state.check) {
@@ -1946,6 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
+        name: "",
         email: "",
         password: "",
         password_conf: ""
@@ -1959,13 +1971,15 @@ __webpack_require__.r(__webpack_exports__);
       console.log("register");
 
       if (this.form.password !== this.form.password_conf) {
-        alert('Password not match with confirmation');
+        alert("Password not match with confirmation");
         return;
       }
 
       axios.post("/api/register", {
+        name: this.form.name,
         email: this.form.email,
-        password: this.form.password
+        password: this.form.password,
+        password_confirmation: this.form.password_conf
       }).then(function (res) {
         // save token to vuex
         _this.$store.dispatch("saveToken", {
@@ -1977,10 +1991,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
         _this.$router.push({
-          name: "dash"
+          path: '/dashboard'
         });
       })["catch"](function (e) {
         console.log(e);
+        alert('Something goes wrong :(');
       });
     }
   }
@@ -39060,6 +39075,38 @@ var render = function() {
           },
           [
             _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-label-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.name,
+                    expression: "form.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "text",
+                  placeholder: "Name",
+                  required: "",
+                  autofocus: ""
+                },
+                domProps: { value: _vm.form.name },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "name", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "inputEmail" } }, [_vm._v("Name")])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-label-group" }, [
               _c("input", {
