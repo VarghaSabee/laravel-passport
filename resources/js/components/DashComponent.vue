@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">Wellcome in Dashboard</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Tou are successfully logged in
                     </div>
                 </div>
             </div>
@@ -17,7 +17,9 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+              if(!this.$store.state.check){
+                this.$router.push({ path: "/"});
+            }
         }
     }
 </script>

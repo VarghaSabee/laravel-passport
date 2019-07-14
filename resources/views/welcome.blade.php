@@ -3,97 +3,118 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                .form-signin {
+                width: 100%;
+                max-width: 420px;
+                padding: 15px;
+                margin: auto;
+                }
 
-            .position-ref {
+                .form-label-group {
                 position: relative;
-            }
+                margin-bottom: 1rem;
+                }
 
-            .top-right {
+                .form-label-group > input,
+                .form-label-group > label {
+                height: 3.125rem;
+                padding: .75rem;
+                }
+
+                .form-label-group > label {
                 position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                top: 0;
+                left: 0;
+                display: block;
+                width: 100%;
+                margin-bottom: 0; /* Override default `<label>` margin */
+                line-height: 1.5;
+                color: #495057;
+                pointer-events: none;
+                cursor: text; /* Match the input under the label */
+                border: 1px solid transparent;
+                border-radius: .25rem;
+                transition: all .1s ease-in-out;
+                }
 
-            .content {
-                text-align: center;
-            }
+                .form-label-group input::-webkit-input-placeholder {
+                color: transparent;
+                }
 
-            .title {
-                font-size: 84px;
-            }
+                .form-label-group input:-ms-input-placeholder {
+                color: transparent;
+                }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+                .form-label-group input::-ms-input-placeholder {
+                color: transparent;
+                }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+                .form-label-group input::-moz-placeholder {
+                color: transparent;
+                }
+
+                .form-label-group input::placeholder {
+                color: transparent;
+                }
+
+                .form-label-group input:not(:placeholder-shown) {
+                padding-top: 1.25rem;
+                padding-bottom: .25rem;
+                }
+
+                .form-label-group input:not(:placeholder-shown) ~ label {
+                padding-top: .25rem;
+                padding-bottom: .25rem;
+                font-size: 12px;
+                color: #777;
+                }
+
+                /* Fallback for Edge
+                -------------------------------------------------- */
+                @supports (-ms-ime-align: auto) {
+                .form-label-group > label {
+                    display: none;
+                }
+                .form-label-group input::-ms-input-placeholder {
+                    color: #777;
+                }
+                }
+
+                /* Fallback for IE
+                -------------------------------------------------- */
+                @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+                .form-label-group > label {
+                    display: none;
+                }
+                .form-label-group input:-ms-input-placeholder {
+                    color: #777;
+                }
+                }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+        <div id="app">
+           <root-component />
         </div>
+        <script type="text/javascript" src="js/app.js"></script>
     </body>
 </html>
